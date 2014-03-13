@@ -1,0 +1,111 @@
+"Name","Gender ","Current Job Title","Areas of Interest","CS work experience ","Education level","Hobbies","KO Oct. 2","KO Sept. 26","KO Sept. 25"
+0,"Male","Senior Instructor`","founder NSG, Network Software Group, Inc., (1994-1996); Senior Software Architect, Open Text Corporation, (1996-2001). Interested in distributed systems, operating systems, computer communications.",,"PhD",,0,1,0
+1,"Female","Instructor",,,,,0,1,0
+2,"Male","Founder",,,,,0,1,0
+3,"Male","Corporate Security Developer/Analyst",,"0-2 years","Bachelor's degree","hiking, swimming, outdoor activities, food, travel",0,1,0
+4,"Male",,"General","20 years +","Master's degree","Volunteering, bridge, Technology, Business, Marketing, Alternative Health, Investing, ...",1,0,1
+5,"Male","Software Developer","Web Development, LAMP stack","3-5 years","Bachelor's degree","Tennis",0,1,1
+6,"Male",,,,,,0,0,0
+7,"Male","Chief Information Officer",,,,,1,0,0
+8,"Female","IT Project Manager II","project management, web development and network projects",,,"Travel, reading, Toastmasters",0,1,0
+9,"Male","Assistant Professor","software engineering and systems research areas, networks, distributed systems, security, and online communities. ",,,,0,0,0
+10,"Male","Consultant/Entrepreneur","Databases, Large data, Performance, Web","10-15 years","Bachelor's degree",,1,0,0
+11,"Male","Staff Engineer","operating systems; distributed systems; networking; embedded systems; software engineering","15-20 years","Master's degree","photography ;Mac computers; cycling (for commuting and exercise); keeping up with my kids!",1,1,1
+12,"Male","Consultant","IT Consulting","0-2 years","Bachelor's degree","Basketball, ice-skating, hiking",1,0,0
+13,"Male","Senior Front End Developer","Front end dev and related technologies","10-15 years","Bachelor's degree","Mountain biking, cooking, and sleeping in.",1,1,1
+14,"Female","Enterprise Solutions Lead",,,,,1,0,0
+15,"Male","Program Manager","Human Computer Interaction, PM (program manager, project management), UI, innotive ideas","0-2 years","Master's degree","eat, future technology, trend and direction",0,0,0
+16,"Male","Business Technology Analyst","Oracle Database Administration, Business Intelligence","0-2 years","Bachelor's degree","Piano, badminton, hockey",0,1,1
+17,"Male","Technical Marketing Engineer","Mobile hardware/software devt.","3-5 years","Bachelor's degree","Photography",0,0,0
+18,"Male","Software Engineer","- Native Application Development&CR;&LF;- Web Development&CR;&LF;- User Interface design&CR;&LF;- User Experience","3-5 years","Bachelor's degree","- Music&CR;&LF;- Basketball&CR;&LF;- Football&CR;&LF;- Food",1,1,0
+19,"Female","Solution Lead, Portal, Search and UX","Social media and web usability",,,,1,0,0
+20,"Male","Development Manager","Enterprise web application development","20+ years","Bachelor's degree",,0,1,0
+21,"Male","Software Developer","Server-side development",,,,0,0,0
+22,"Male","CTO","software architecture, software development processes, project management, business development",,,,0,1,0
+23,"Male","Retired - work part time","System safety, software management","20 years +","Bachelor's degree",,1,1,0
+24,"Male","Software Development Manager",,,,,0,0,0
+25,"male","Coordinator, Provincial Pharmacy Information Systems","Pharmacy Oncology",2009,"Master's Degree",,1,0,0
+26,"male","Software Developer","web and mobile programming",2007,"Ph.D. or similar post-graduate work","Music, ski, windsurfing",0,1,0
+27,"Male","Software Engineer",,,,,0,1,0
+28,"female","Programmer Analyst","Web development",2009,"Bachelor's Degree","visual arts, culture and history",0,0,1
+29,"Male","Senior Software Engineer","Programming Languages, Software Engineering, Tools, Compilers","5-10 years","PhD","Biking, running, snow boarding",0,1,1
+30,"male","Software Dev Engineer","software development, data analysis, online marketing",2010,"Master's Degree","Programming, hiking",0,1,0
+31,"Female","Delivery Project Manager",,,,,0,0,0
+32,"Male","VP Marketing",,,,,0,0,1
+33,"Female","Software Engineer",,,,,1,0,0
+34,"Male","Team Lead, Systems Operation",,,,,1,0,0
+35,"Female","Biomarker Program Manager","Data mining, bioinformatics, health informatics","5-10 years","PhD","Travelling, knitting, reading",1,0,0
+36,"Male",,,,,,0,0,0
+37,"Male",,,,,,0,1,0
+38,"Male",,"Web technologies, UI, graphics arts",1987,"Bachelor's Degree","Adventure racing, guitar, carpentry",0,0,0
+39,"Female","User Experience Architect","Information and Interaction Architecture, Information Design, Responsive Web Design, Usability Research and Evaluation, Content Strategy, Web and Mobile Accessibility",,,,0,0,0
+40,"Male","Internal Consultant","Business Development&CR;&LF;Data-mining","3-5 years","Master's degree",,1,1,0
+41,"Male","CIO",,,,,0,0,1
+42,"Male","Lecturer","Machine Learning ;Date Mining; Social Network Analysis; Security in Mobile Computing","3-5 years","PhD",,1,1,1
+43,"male","Senior Director Engineering","LEAN/Agile, management and leadership, Business Intelligence, ",1988,"Bachelor's Degree",,1,0,0
+44,"male",,"Strategy and IT Consulting",2003,"Bachelor's Degree","Golf, Tennis, Standup Comedy, Biking",1,0,0
+45,"Female","Manager, Performance Measurement & Reporting","Data management; Information management; Information systems","10-15 years","Master's degree","Playing the violin, swimming",0,1,0
+46,"Male","Software Engineer","large scale data, web FE, mathematics, bioinformatics, software testing.","3-5 years","Master's degree","basketball, table tennis, pool, guitar, board games, card games",0,0,0
+47,"Female","Business Analyst","Risk management","3-5 years","Bachelor's degree","Bicycling, traveling, snowboarding, arts and crafts, baking",1,1,1
+48,"Female","Program Manager",,,,,0,0,0
+49,"Male","Test Automation Engineer","Full stack web and mobile applications,&CR;&LF;Programming languages,&CR;&LF;Linux&CR;&LF;","0-2 years","Bachelor's degree","Games(computer/tabletop), mobile gadgets, web/app development, startups and side projects",1,0,1
+50,"male",,"computer-aided diagnosis; image analysis; skin cancer",1980,"Ph.D. or similar post-graduate work",,1,0,0
+51,"female","Scrum Master","Software Development and Testing",2001,"Bachelor's Degree","Swimming, synchronize swimming, cycling, hiking, reading books.",1,0,0
+52,"Male","Consultant - Business Systems","Business Analysis and Project Management","5-10 years","Master's degree","basketball, baseball, competitive gaming",1,0,0
+53,"Male","Forward Deployed Engineer","Entrepreneurship, Big Data, B2B, Data Analysis","3-5 years","Bachelor's degree","attending hackathons, working on side tech/web projects, travel",0,0,0
+54,"Male","Manager of Academic Research Centre",,,,,0,0,0
+55,"Female","Senior QA Analyst",,,,,0,0,1
+56,,"Software Engineer ","Software Engineering",2011,"Master's Degree","baseball, manga",0,0,0
+57,"male","Software Engineer","Gaming",2005,"Bachelor's Degree","Outdoor activities, camping, mountain biking, snowboarding.",1,0,0
+58,"Female","Director, Member Experience & Sales",,,,,0,0,1
+59,"Female","Business Analyst","Media Solutions",,,,0,0,1
+60,"Female","Software Engineer",,,,,0,1,0
+61,"Male","XML Technology Specialist","Used to work for Blast Radius.  Expert in Information Architecture, User Experience, Technical Writing/Communication, Agile Methods.  ","20+ years","Master's degree",,0,0,1
+62,"male",,"Principal Software Engineer at Convergent.io.  Graduated with M.Sc. from the department in May 2012.  Was Alla's student and specializes in geometry processing, image processing, computer architechture.  Was an intern at Adobe.  Had worked in IBM Research Lab at Haifa, Israel, from 2001 to 2009.",,,,1,0,0
+63,"Female","Pipeline Programmer","Computer Graphics","3-5 years","Master's degree",,0,1,0
+64,"Female",,,,,,0,0,0
+65,"Male","Co-Founder & Chief Architect","Software strategy, design and data architecture. Data visualization.",,,,0,0,1
+66,"Male","Sr. Software Analyst","C/C++ and C#, Awk, Perl, Ruby; GUI and Command Line; Windows, Linux","20+ years","Bachelor's degree","Motorcycling ;Volleyball; Floor Hockey.",1,0,0
+67,"Female","Developer Analyst I",,,,,0,0,1
+68,"Male",,,,,,1,0,0
+69,"Male","Business Architect","Project management ",,,,0,1,0
+70,"Male","Software Engineer",,,"PhD",,0,0,0
+71,"male","Application Architect","Software Development",2011,"Master's Degree",,0,0,0
+72,"Male","Co-founder",,,,,1,0,0
+73,"male","Software Developer","Software Development",2002,"Bachelor's Degree","Chess, Computer Games, Weight Training",1,0,0
+74,"Male","Technical Director","Executive level technology management, software and technical project architecture, strategic technology planning, technical team building. Engineer management, mentoring and recruiting, technical resource management",,,,0,0,1
+75,"Male","CTO","Video games, Ubiquitous Computing, Organizational Dynamics","20+ years","Bachelor's degree","Sports and Games",1,0,0
+76,"Male","Software Engineer",,,,,0,0,0
+77,"Female","IT Infrastructure Project Manager",,,,,1,1,0
+78,"Male","Chief Technology Officer",,,,,1,0,0
+79,"Male","Senior Project Manager","Enterprise Architecture; Software Architecture; Web Development","10-15 years","Bachelor's degree","blogging, home improvement, beach combing",1,1,1
+80,"male","Computer Systems Specialist","System admin, IT operations. HPC cluster and large-scale system administration, Linux system administration,VMWare virtualization infrastructure, Microsoft Exchange messaging",,,,0,0,1
+81,"Male","Application Analyst",,,,,0,0,1
+82,"female","Software Developer","Software",2008,"Master's Degree","hiking, cycling, running, swimming, cooking/baking, reading, travel, etc.",0,0,0
+83,"Male","Business Analyst - IT","Business Analysis, Project Management","5-10 years","Bachelor's degree","Tennis, running, cycling&CR;&LF;Reading, cooking, eating, gardening&CR;&LF;Opera, theatre, traveling!!",0,1,0
+84,"Female",,,,,,0,0,0
+85,"female ","Software Developer","Software Development; Cloud development, scrum/agile, usability, UI & backend",,,,0,0,0
+86,"Female","Self-employed consulting","Business analysis",,,,0,0,1
+87,"Male","Co-founder","HCI + Business/Computer Science Combined Major","3-5 years","Bachelor's degree","Animation, design, art, video production, music (piano, drums, composition, electronic), skiing/snowboarding, ultimate frisbee, soccer",1,0,1
+88,"Male","Solution Architect - Engineering IT, Acquisitions",,,"PhD",,0,0,1
+89,"Male","VP Engineering",,"10-15 years","Bachelor's degree",,0,0,1
+90,"Female","Program Manager","Software development, project management","20+ years","Master's certificate",,1,0,0
+91,"Male","Senior Software Engineer","Video Games, Interactive Mobile Entertainment and Networking.","10-15 years","Bachelor's degree","Swimming, cycling, scuba diving, target shooting and drawing.",1,1,1
+92,"Male","Software Developer","iOs development",,,,0,0,1
+93,"Male","Retired","Product Management, Requirement Analysis, Strategy, Solution/Enterprise Architecture, SW Design, UX, Workflow, Data Modelling, Development Management","20+ years","Master's degree","Cooking, music, travelling, reading, swimming, cycling",0,0,0
+94,"Male","Systems Development Consultant","Web dev., mobile dev., Web 2.0",,,,1,0,0
+95,"Female",,,,,,0,1,0
+96,"male",,"Commercial Software / Network Analysis",1971,"Master's Degree","Reading, Hockey, Bicycling, Experimental Software, Quantum Mechanics",0,0,1
+97,"Male","Business Analyst II","Business Intelligence, Data Visualization, Analytics","5-10 years","Master's degree","Photography, Volleyball",1,1,1
+98,"Female","Software Development Engineer","Graph theory, NLP, social psychology","3-5 years","Bachelor's degree","Photography, local music, typography, Tumblr",1,1,1
+99,"Male","Development Support","User Experience, Mobile Applications, Quality Assurance, Technical Support","0-2 years","Bachelor's degree","Winter sports (snowboarding/skiing), water and wind sports (Sailing/windsurfing), board games, cooking, science fiction and fantasy,",1,0,0
+100,"Female","Business Analyst",,,,,1,1,0
+101,"Male","Analyst",,,,,0,0,0
+102,"Female","Senior Tester",,,"PhD",,0,0,0
+103,"male",,"Software quality/testing",2006,"Bachelor's Degree","Hiking,badminton,gaming,movies",0,1,0
+104,"Female","Co-op Coordinator","Career Development",,,,0,1,0
+105,"male","Software Development Engineer in Test"," Specializes in object oriented programming, database, C#, test automation.
+
+",,,,0,1,0
+106,"Female","software test analyst  level 1","mobile application","3-5 years","Master's degree",,0,1,0
+107,"Male","Software Developer Engineer II","Software as a service",,,,0,1,0
