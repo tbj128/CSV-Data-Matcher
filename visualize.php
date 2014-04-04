@@ -206,8 +206,10 @@
 					}
 				?>
 				<hr />
-				<button type="submit" class="btn btn-primary btn-lg btn-block">Save and Continue</button>
-				
+				<a href="match.php" class="btn btn-primary btn-lg btn-block has-spinner">
+					<span class="spinner"><i class="fa fa-spin fa-refresh"></i></span>
+					Save and Continue
+				</a>
 			</div>
         </div>
         <!-- /.container -->
@@ -240,6 +242,7 @@
 	<script src="slickgrid/controls/slick.pager.js"></script>
 
 	<script>
+		
 		function f_h(row, cell, value, columnDef, dataContext) {
 	    	return "<div class='vi-header'>" + value + "</div>";
 		}
@@ -247,6 +250,12 @@
 	    	var colorInterval = parseInt(value / <?php echo $score_interval; ?>);
 	    	return "<div class='vi-" + colorInterval + "'>" + value + "</div>";
 		}
+		
+		$(function() {
+			$('a.has-spinner').click(function() {
+				$(this).toggleClass('active');
+			});
+		});
 		
 		<?php
 			$s = 0;
@@ -287,7 +296,7 @@
 				$last_row_pos = count($titles_array[$x]['a']) - 1;
 				echo '{id: "vertical-items-' . $x . '", name: "&times;", field: "vi_' . $x . '", formatter: f_h},';
 				foreach ($titles_array[$x]['a'] as $title) {
-					echo '{id: "' . $x . '-' . $z . '", name: "' . $title . '", field: "' . $x . '_' . $z . '", formatter: f_i}';
+					echo '{id: "' . $x . '-' . $z . '", name: "' . $title . '", field: "' . $x . '_' . $z . '", formatter: f_i, sortable: true}';
 					if ($z != $last_row_pos) {
 						echo ',';
 					}
@@ -327,6 +336,7 @@
 				rowHeight: 38,
 				enableCellNavigation: true,
 				enableColumnReorder: false,
+    			multiColumnSort: true,
 				frozenColumn: 0 };';
 				
 			echo '$(function () {';			
@@ -365,6 +375,27 @@
 			<?php
 			for ($x = 0; $x < count($matrices); $x++) {
 				echo 'grid_' . $x . ' = new Slick.Grid("#relationship_grid_' . $x . '", data[' . $x . '], columns_' . $x . ', options);';
+echo 'grid_' . $x . '.onSort.subscribe(function (e, args) {
+      var cols = args.sortCols;
+
+      data.sort(function (dataRow1, dataRow2) {
+          console.log(dataRow1);
+          console.log("asdf");
+          console.log(dataRow2);
+        for (var i = 0, l = cols.length; i < l; i++) {
+          var field = cols[i].sortCol.field;
+          var sign = cols[i].sortAsc ? 1 : -1;
+          var value1 = dataRow1[field], value2 = dataRow2[field];
+          var result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
+          if (result != 0) {
+            return result;
+          }
+        }
+        return 0;
+      });
+      grid_' . $x . '.invalidate();
+      grid_' . $x . '.render();
+    });';
 			}
 			echo '});';
 		?>

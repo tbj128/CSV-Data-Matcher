@@ -50,11 +50,6 @@
 
     <!-- Add custom CSS here -->
     <link href="css/landing-page.css" rel="stylesheet">
-    <style>
-		.table td {
-			vertical-align:middle !important;
-		}
-	</style>
 </head>
 
 <body>
@@ -69,7 +64,7 @@
 			<div class="page-header">
               	<h1 id="navbar">Matching Parameters</h1>
               	<div style="width:800px;">
-              		<blockquote>Similarity between corresponding rows in a dataset is determined by the similarity between certain columns. Indicate what and how columns are to be compared with each other below</blockquote>
+              		<blockquote>Similarity between corresponding rows in a dataset is determined by the similarity between certain columns. Indicate how these columns are to be compared with each other below</blockquote>
 				</div>
 			</div>
 				<form method="post" action="visualize.php">
@@ -86,7 +81,7 @@
 									<td></td>
 									<td><?php echo $relationship[1]; ?> <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Data columns from the second dataset.">(?)</a></td>
 									<td>Importance <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="The relative importance of this data column match pair compared to other data column match pairs.">(?)</a></td>
-									<td>Type <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Exact Match: Two data cells must be identical. Inexact Match: Two data cells are comma separated lists. Conditional Match: Two data cells must match up with third.">(?)</a></td>
+									<td>Match Type <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Exact Match: Two data cells must be identical. Inexact Match: Two data cells are comma separated lists. Conditional Match: Two data cells must match up with third.">(?)</a></td>
 									<td>Conditional <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Phrase used in conditional matches OR number used in range matches.">(?)</a></td>
 								</tr>
 							</thead>
@@ -96,18 +91,20 @@
 										echo '<input type="hidden" name="' . $j . '_pair_a" value="' . $relationship[0] . '">';
 										echo '<input type="hidden" name="' . $j . '_pair_b" value="' . $relationship[1] . '">';
 										foreach ($data_headers[$relationship[0]] as $header) {
-											echo '<tr><td><input type="hidden" name="' . $j . '_' . $i . '_header" value="' . $header . '">
+											echo '<tr>';
+											echo '<td><input type="hidden" name="' . $j . '_' . $i . '_header" value="' . $header . '">
 												' . $header . '</td>';
 											echo '<td style="color:#CECECE;"> pairs with </td>';
 											echo '<td>
 												<select class="form-control" name="' . $j . '_' . $i . '_match_with">';
+												echo '<option value="">-</option>';
 												foreach ($data_headers[$relationship[1]] as $inner_header) {
 													echo '<option value="' . $inner_header . '">' . $inner_header . '</option>';
 												}
 											echo '</select></td>';
 											echo '<td>
 												<select class="importance-select form-control" data-pair="' . $j . '" data-item="' . $i . '" name="' . $j . '_' . $i . '_importance" id="' . $j . '_' . $i . '_importance">
-												  <option value="0">Don\'t Use to Match</option>
+												  <option value="0">Do Not Use</option>
 												  <option value="3">Important</option>
 												  <option value="2">Somewhat Important</option>
 												  <option value="1">Least Important</option>
@@ -123,7 +120,6 @@
 											echo '<td><input type="text" name="' . $j . '_' . $i . '_conditional" id="' . $j . '_' . $i . '_conditional" style="display:none;"><span id="' . $j . '_' . $i . '_conditional_empty">-</span></td></tr>';
 											$i++;
 										}
-								//	}
 								?>
 							</tbody>
 						</table>
@@ -133,7 +129,10 @@
 						$j++;
 						}
 					?>
-					<button type="submit" class="btn btn-primary btn-lg btn-block">Save and Continue</button>
+					<button type="submit" class="btn btn-primary btn-lg btn-block has-spinner">
+						<span class="spinner"><i class="fa fa-spin fa-refresh"></i></span>
+						Save and Continue
+					</button>
 				</form>
 			</div>
         </div>
@@ -151,6 +150,9 @@
     <script>
     	$( document ).ready(function() {
     		$('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+			$('button.has-spinner').click(function() {
+				$(this).toggleClass('active');
+			});
     		
     		$('.importance-select').change(function() {
     			$pair = $(this).data("pair");

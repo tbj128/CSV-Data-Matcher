@@ -8,9 +8,34 @@ body, h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 }
 
+/* Tables */
 .table td {
 	vertical-align:middle !important;
 }
+
+/* Spinning Icon */
+.spinner {
+  display: inline-block;
+  opacity: 0;
+  max-width: 0;
+  margin-right:10px;
+
+  -webkit-transition: opacity 0.25s, max-width 0.45s; 
+  -moz-transition: opacity 0.25s, max-width 0.45s;
+  -o-transition: opacity 0.25s, max-width 0.45s;
+  transition: opacity 0.25s, max-width 0.45s; /* Duration fixed since we animate additional hidden width */
+}
+
+.has-spinner.active {
+  cursor:progress;
+}
+
+.has-spinner.active .spinner {
+  opacity: 1;
+  max-width: 50px; /* More than it will ever come, notice that this affects on animation duration */
+}
+
+/* Navigation */
 		
 .pale-box {
 	background-color: #FFFFFF;
