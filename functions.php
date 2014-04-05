@@ -52,6 +52,21 @@
 		return $data;
 	}
 	
+	// ***
+	// CSV Generation
+	// ***
+	function array_to_csv_download($array, $filename = "export.csv") {
+		header('Content-Type: application/csv');
+		header('Content-Disposition: attachement; filename="'.$filename.'";');
+
+		// open the "output" stream
+		// see http://www.php.net/manual/en/wrappers.php.php#refsect2-wrappers.php-unknown-unknown-unknown-descriptioq
+		$f = fopen('php://output', 'w');
+
+		foreach ($array as $line) {
+			fputcsv($f, $line);
+		}
+	}   
 	
 	// ***
 	// String Operations

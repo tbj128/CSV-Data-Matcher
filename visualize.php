@@ -3,6 +3,7 @@
 	// Created for UBC CS - Trimentoring
 	// @author: Tom Jin
 	// @date: Feb 2, 2014
+	ini_set('max_execution_time', 300);
 	
 	include_once 'config.php';
 	include_once 'functions.php';

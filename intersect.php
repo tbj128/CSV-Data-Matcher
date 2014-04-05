@@ -87,6 +87,7 @@
 							</thead>
 							<tbody>
 								<?php
+								
 										$i = 0;
 										echo '<input type="hidden" name="' . $j . '_pair_a" value="' . $relationship[0] . '">';
 										echo '<input type="hidden" name="' . $j . '_pair_b" value="' . $relationship[1] . '">';
@@ -150,7 +151,7 @@
     <script>
     	$( document ).ready(function() {
     		$('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
-			$('button.has-spinner').click(function() {
+			$('.has-spinner').click(function() {
 				$(this).toggleClass('active');
 			});
     		
