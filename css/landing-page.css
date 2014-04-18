@@ -80,13 +80,53 @@ body, h1, h2, h3, h4, h5, h6 {
 	font-weight: 400;
 }
 
+.upload-card {
+	height:160px;
+	background:#D9230F;
+	border:1px solid #EEE;
+	padding:16px 0;
+	text-align:center;
+	display: table; 
+	overflow: hidden;
+	cursor:pointer;
+}
+
+.upload-card:hover {
+	background:#be3627;
+}
+
+.upload-card-small {
+	width:224px;
+	height:60px;
+	background:#EEE;
+	margin:8px;
+	padding:16px 0;
+	float:left;
+	text-align:center;
+	overflow: hidden;
+	vertical-align:middle;
+}
+
+.upload-card-small:hover {
+	background:#DDD;
+}
+
+.upload-files {
+	min-height:160px;
+	background:#FFF;
+	border:1px solid #EEE;
+	padding:16px;
+	margin:0 16px;
+	display: table; 
+	overflow: hidden;
+}
+
 .intro-header {
 	padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
 	padding-bottom: 50px;
 	color: #f8f8f8;
 	background: url(../img/intro-bg.jpg) no-repeat center center;
 	background-size: cover;
-	text-align: center;
 }
 
 .intro-message {
@@ -98,6 +138,7 @@ body, h1, h2, h3, h4, h5, h6 {
 .intro-message > h1 {
 	margin: 0;
 	font-size: 5em;
+	color:#FFF;
 	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 

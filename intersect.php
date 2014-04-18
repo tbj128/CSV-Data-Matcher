@@ -28,6 +28,7 @@
 	} else {
 		$relationships = $_SESSION['relationships'];
 	}
+
 ?>
 
 <!DOCTYPE html>
@@ -111,14 +112,18 @@
 												  <option value="1">Least Important</option>
 												</select></td>';
 											echo '<td>
-												<select class="type-select form-control" data-pair="' . $j . '" data-item="' . $i . '" name="' . $j . '_' . $i . '_type" id="' . $j . '_' . $i . '_type" style="display:none;">
+												<select class="type-select form-control" data-pair="' . $j . '" data-item="' . $i . '" name="' . $j . '_' . $i . '_type" id="' . $j . '_' . $i . '_type">
 												  <option value="1">Exact Match</option>
-												  <option value="4">Similar Text</option>
+												  <option value="4">Similar Wording</option>
 												  <option value="2">Comma Separated Lists</option>
 												  <option value="3">Conditional Match</option>
 												  <option value="5">Match Within Range</option>
 												</select><span id="' . $j . '_' . $i . '_type_empty">-</span></td>';
-											echo '<td><input type="text" name="' . $j . '_' . $i . '_conditional" id="' . $j . '_' . $i . '_conditional" style="display:none;"><span id="' . $j . '_' . $i . '_conditional_empty">-</span></td></tr>';
+											echo '<td>
+													<input type="text" name="' . $j . '_' . $i . '_conditional" id="' . $j . '_' . $i . '_conditional" style="display:none;" data-toggle="tooltip" data-placement="top" data-original-title="A good match occurs when both data fields match this term." />
+													<span id="' . $j . '_' . $i . '_conditional_empty">-</span>
+												  </td>
+												</tr>';
 											$i++;
 										}
 								?>

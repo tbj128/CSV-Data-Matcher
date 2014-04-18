@@ -56,66 +56,57 @@
 		include "page_header.php";
 	?>
 
-    <div class="intro-header">
-
+    <div class="content-section-a">
         <div class="container">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>Tri-Mentoring Matchup</h1>
-                        <h3>Begin by uploading the documents below</h3>
-                        <hr class="intro-divider">
-						<div class="well" style="opacity:0.9;width:260px;margin:10px auto;color:#222;">
-							<form method="post" action="intersect.php">
-								<div class="form-group">
-									<label>Student (Junior) Data</label><br />
-									<input class="form-control" type="hidden" name="junior_path" id="junior_path" value="">
-									<input class="form-control" type="text" name="junior_path_desc" id="junior_path_desc" value="" style="display:none;" disabled>
-									<span class="btn btn-success fileinput-button">
-										<i class="fa fa-upload"></i>
-										<span>&nbsp;&nbsp;Select CSV...</span>
-										<!-- The file input field used as target for the file upload widget -->
-										<input id="fileupload_junior" type="file" name="files[]">
-									</span>
-								</div>
-								<hr />
-								<div class="form-group">
-									<label>Student (Senior) Data</label><br />
-									<input class="form-control" type="hidden" name="senior_path" id="senior_path" value="">
-									<input class="form-control" type="text" name="senior_path_desc" id="senior_path_desc" value="" style="display:none;" disabled>
-									<span class="btn btn-success fileinput-button">
-										<i class="fa fa-upload"></i>
-										<span>&nbsp;&nbsp;Select CSV...</span>
-										<!-- The file input field used as target for the file upload widget -->
-										<input id="fileupload_senior" type="file" name="files[]">
-									</span>
-								</div>
-								<hr />
-								<div class="form-group">
-									<label>Mentor Data</label><br />
-									<input class="form-control" type="hidden" name="mentor_path" id="mentor_path" value="">
-									<input class="form-control" type="text" name="mentor_path_desc" id="mentor_path_desc" value="" style="display:none;" disabled>
-									<span class="btn btn-success fileinput-button">
-										<i class="fa fa-upload"></i>
-										<span>&nbsp;&nbsp;Select CSV...</span>
-										<!-- The file input field used as target for the file upload widget -->
-										<input id="fileupload_mentor" type="file" name="files[]">
-									</span>
-								</div>
-								<hr />
-								<p><input type="submit" class="btn btn-primary" value="Continue"></p>
-							</form>
+			<div style="margin-top:58px;">
+				<div class="page-header">
+					<h1 id="navbar">Pair Up.</h1>
+					<h3>Upload, visualize, and match CSV datasets.</h3>
+				</div>
+				<form id="uploadForm" method="post" action="diverge.php">
+				<input type="submit" id="uploadSubmit" style="display:none;">
+				<input type="hidden" name="upload_items" id="uploadItems" value="">
+				<div class="row">
+					<div id="uploadButton" class="col-lg-3 upload-card img-rounded">
+						<div style="display: table-cell; vertical-align: middle;">
+							<div>
+								<img src="img/ic-upload.png">
+								<span style="color:#FFF;font-size:22px;margin:5px 0 0 10px;vertical-align:middle;">
+									Select CSV Data
+								</span>
+							</div>
 						</div>
-                    </div>
-                </div>
-            </div>
-
+					</div>
+					<div id="continueButton" class="col-lg-3 upload-card img-rounded" style="display:none;">
+						<div style="display: table-cell; vertical-align: middle;">
+							<div>
+								<img src="img/ic-check.png">
+								<span style="color:#FFF;font-size:22px;margin:5px 0 0 10px;vertical-align:middle;">
+									Continue
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-8 upload-files img-rounded">
+						<div id="uploadWrap" style="display: table-cell; vertical-align: middle;">
+							<div id="uploadBox">
+								<p id="noItemsMsg" style="text-align:center;font-size:14px;">No files uploaded yet.</p>
+							</div>
+						</div>
+					</div>
+				</div><!-- /.row -->
+<!-- 
+				<div class="row">
+					<p><input type="submit" class="btn btn-primary" value="Continue"></p>
+				</div>
+ -->
+			  </form>
+        	</div>
         </div>
         <!-- /.container -->
 
     </div>
-    <!-- /.intro-header -->
 
 
 	<?php
@@ -126,107 +117,74 @@
     <!-- JavaScript -->
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
-	
-	<script src="js/fileuploader/jquery.ui.widget.js"></script>
-	<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-	<script src="js/fileuploader/jquery.iframe-transport.js"></script>
-	<!-- The basic File Upload plugin -->
-	<script src="js/fileuploader/jquery.fileupload.js"></script>
-	<script>
-		$(document).ready(function() {
-			// File Upload Plugin
-			var url = 'upload/';
-			$('#fileupload_junior').fileupload({
-				url: url,
-				dataType: 'json',
-				add: function (e, data) {
-					$('#junior_path').val(data.files[0].name);
-					$('#junior_path_desc').val(data.files[0].name);
-					console.log(data.files[0].name);
-					data.submit();
-				},
-				complete: function (e, data) {
-					console.log(e);
-					console.log(data);
-					$('#fileupload_junior').hide();
-					$("#junior_path_desc").show();
-				},
-				progressall: function (e, data) {
-					// var progress = parseInt(data.loaded / data.total * 100, 10);
-					// $('#progress .bar').css(
-						// 'width',
-						// progress + '%'
-					// );
-				}
-			});
-			$('#fileupload_senior').fileupload({
-				url: url,
-				dataType: 'json',
-				add: function (e, data) {
-					$('#senior_path').val(data.files[0].name);
-					$('#senior_path_desc').val(data.files[0].name);
-					console.log(data.files[0].name);
-					data.submit();
-				},
-				complete: function (e, data) {
-					console.log(e);
-					console.log(data);
-					$('.fileupload_senior').hide();
-					$("#senior_path_desc").show();
-				},
-				progressall: function (e, data) {
-					// var progress = parseInt(data.loaded / data.total * 100, 10);
-					// $('#progress .bar').css(
-						// 'width',
-						// progress + '%'
-					// );
-				}
-			});
-			$('#fileupload_mentor').fileupload({
-				url: url,
-				dataType: 'json',
-				add: function (e, data) {
-					$('#mentor_path').val(data.files[0].name);
-					$('#mentor_path_desc').val(data.files[0].name);
-					console.log(data.files[0].name);
-					data.submit();
-				},
-				complete: function (e, data) {
-					console.log(e);
-					console.log(data);
-					$('#fileupload_mentor').hide();
-					$("#mentor_path_desc").show();
-				},
-				progressall: function (e, data) {
-					// var progress = parseInt(data.loaded / data.total * 100, 10);
-					// $('#progress .bar').css(
-						// 'width',
-						// progress + '%'
-					// );
-				}
-			});
-			
-			
-			
-			$('#fileupload_junior').bind('fileuploadstart', function (e) {
-				//$('#upload-status').show();
-			});
-			$('#fileupload_senior').bind('fileuploadstart', function (e) {
-				//$('#upload-status').show();
-			});
-			$('#fileupload_mentor').bind('fileuploadstart', function (e) {
-				//$('#upload-status').show();
-			});
-			
-			$('button.cancel').click(function () {
-				//$('#upload-status').hide();
-			});
-		
-		
-		});
+    <script src="js/SimpleAjaxUploader.js"></script>
+    
+    
+    <script>
+    	$( document ).ready(function() {
+    		var uploader = new ss.SimpleUpload({
+				button: 'uploadButton',
+				url: 'uploadHandler.php', // server side handler
+				progressUrl: 'uploader/uploadProgress.php', // enables cross-browser progress support (more info below)
+				responseType: 'json',
+				name: 'uploadfile',
+				multiple: true,
+				allowedExtensions: ['csv'], // for example, if we were uploading pics
+				hoverClass: 'ui-state-hover',
+				focusClass: 'ui-state-focus',
+				disabledClass: 'ui-state-disabled',  
+				onSubmit: function(filename, ext) {            
+				   var prog = document.createElement('div'),
+					   outer = document.createElement('div'),
+					   bar = document.createElement('div'),
+					   size = document.createElement('div'),
+					   wrap = document.getElementById('uploadBox'),
+					   errBox = document.getElementById('noItemsMsg');
+   
+					$('#noItemsMsg').hide();
+					prog.className = 'prog';
+					size.className = 'size';
+					outer.className = 'progress progress-striped active';
+					bar.className = 'progress-bar progress-bar-success';
 
-	</script>
+					outer.appendChild(bar);
+					prog.innerHTML = '<span style="vertical-align:middle;">'+filename+' - </span>';
+					prog.appendChild(size);
+					prog.appendChild(outer);
+					wrap.appendChild(prog); // 'wrap' is an element on the page
 
+					this.setProgressBar(bar);
+					this.setProgressContainer(prog);
+					this.setFileSizeBox(size);      
+
+					errBox.innerHTML = '';
+					$('#uploadButton').hide();
+					$('#continueButton').show();
+				  },	
+				   // Do something after finishing the upload
+				   // Note that the progress bar will be automatically removed upon completion because everything 
+				   // is encased in the "wrapper", which was designated to be removed with setProgressContainer() 
+				  onComplete:   function(filename, response) {
+						if (!response) {
+							alert(filename + ' upload failed');
+							return false;
+						} else {
+							var uploadedItems = $('#uploadItems').val();
+							if (uploadedItems != '') {
+								uploadedItems = uploadedItems + ',' + response.file;
+							} else {
+								uploadedItems = response.file;
+							}
+							$('#uploadItems').val(uploadedItems);
+							$('#uploadBox').append('<div class="upload-card-small img-rounded">' + response.file + '</div>');
+						}
+					}
+			});
+			
+			$('#continueButton').click(function() {
+				$("#uploadSubmit").click();
+			});
+    	});
+    </script>
 </body>
-
 </html>

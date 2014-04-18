@@ -10,51 +10,65 @@
 	session_start();
 	$curr_page = 1;
 	
-	$junior_name = 'Junior Data.csv';
-	$senior_name = 'Senior Data.csv';
-	$mentor_name = 'Mentor Data.csv';
-	
-	// Moves the files to the CSV folder if not moved already
-	if (isset($_POST['mentor_path'])
-		&& isset($_POST['junior_path'])
-		&& isset($_POST['senior_path'])) {
-
-		$mentor_name = $_POST['mentor_path'];
-		$junior_name = $_POST['junior_path'];
-		$senior_name = $_POST['senior_path'];
-		
-		rename('upload/files/' . $mentor_name, 'csv/' . $mentor_name);
-		rename('upload/files/' . $junior_name, 'csv/' . $junior_name);
-		rename('upload/files/' . $senior_name, 'csv/' . $senior_name);
+	$csv_files = array();
+	if (isset($_POST['upload_items'])) {
+		$uploaded_items = explode(",", $_POST['upload_items']);
+		foreach ($uploaded_items as $uploaded_item) {
+			$csv_files[] = $uploaded_item;
+		}
 	}
 	
-	
-	// Dump the CSV files into an array
-	$junior_headers = csv_get_headers($junior_name);
-	$senior_headers = csv_get_headers($senior_name);
-	$mentor_headers = csv_get_headers($mentor_name);
-	
-	$junior_data = csv_get_array($junior_name);
-	$senior_data = csv_get_array($senior_name);
-	$mentor_data = csv_get_array($mentor_name);
-	
-	// Are these CSV files usable? 
-	if ($junior_data === FALSE 
-		|| $senior_data === FALSE 
-		|| $mentor_data === FALSE) {
-		header("Location: index.php?err");
-	}
+// 	$junior_name = 'Junior Data.csv';
+// 	$senior_name = 'Senior Data.csv';
+// 	$mentor_name = 'Mentor Data.csv';
+// 	
+// 	// Moves the files to the CSV folder if not moved already
+// 	if (isset($_POST['mentor_path'])
+// 		&& isset($_POST['junior_path'])
+// 		&& isset($_POST['senior_path'])) {
+// 
+// 		$mentor_name = $_POST['mentor_path'];
+// 		$junior_name = $_POST['junior_path'];
+// 		$senior_name = $_POST['senior_path'];
+// 		
+// 		rename('upload/files/' . $mentor_name, 'csv/' . $mentor_name);
+// 		rename('upload/files/' . $junior_name, 'csv/' . $junior_name);
+// 		rename('upload/files/' . $senior_name, 'csv/' . $senior_name);
+// 	}
 	
 	$data_headers = array();
-	$data_headers[$junior_name] = $junior_headers;
-	$data_headers[$senior_name] = $senior_headers;
-	$data_headers[$mentor_name] = $mentor_headers;
-	
-	
 	$data = array();
-	$data[$junior_name] = $junior_data;
-	$data[$senior_name] = $senior_data;
-	$data[$mentor_name] = $mentor_data;
+	foreach ($csv_files as $csv_file) {
+		$data_headers[$csv_file] = csv_get_headers($csv_file);
+		$data[$csv_file] = csv_get_array($csv_file);
+	}
+	
+	// Dump the CSV files into an array
+// 	$junior_headers = csv_get_headers($junior_name);
+// 	$senior_headers = csv_get_headers($senior_name);
+// 	$mentor_headers = csv_get_headers($mentor_name);
+// 	
+// 	$junior_data = csv_get_array($junior_name);
+// 	$senior_data = csv_get_array($senior_name);
+// 	$mentor_data = csv_get_array($mentor_name);
+	
+	// Are these CSV files usable? 
+// 	if ($junior_data === FALSE 
+// 		|| $senior_data === FALSE 
+// 		|| $mentor_data === FALSE) {
+// 		header("Location: index.php?err");
+// 	}
+	
+// 	$data_headers = array();
+// 	$data_headers[$junior_name] = $junior_headers;
+// 	$data_headers[$senior_name] = $senior_headers;
+// 	$data_headers[$mentor_name] = $mentor_headers;
+// 	
+// 	
+// 	$data = array();
+// 	$data[$junior_name] = $junior_data;
+// 	$data[$senior_name] = $senior_data;
+// 	$data[$mentor_name] = $mentor_data;
 	
 	$_SESSION['headers'] = $data_headers;
 	$_SESSION['data'] = $data;
@@ -97,8 +111,9 @@
 			<div style="margin-top:50px;">
 				<div class="row">
 					<h2>Specify Match Groups</h2>
-					<h4>You've uploaded <?php echo count($data); ?> data files. Which match group pairs do you want to generate between them?</h4>
-					<br />
+					<div>
+						<blockquote>You've uploaded <?php echo count($data); ?> data files. Select the matching relationship you want to generate below.</blockquote>
+					</div>
 				</div>
 				<form method="post" action="intersect.php">
 					<div class="row">
