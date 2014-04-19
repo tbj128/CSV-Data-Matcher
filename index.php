@@ -129,10 +129,10 @@
 				responseType: 'json',
 				name: 'uploadfile',
 				multiple: true,
-				allowedExtensions: ['csv'], // for example, if we were uploading pics
+				allowedExtensions: ['csv'],
 				hoverClass: 'ui-state-hover',
 				focusClass: 'ui-state-focus',
-				disabledClass: 'ui-state-disabled',  
+				disabledClass: 'ui-state-disabled', 
 				onSubmit: function(filename, ext) {            
 				   var prog = document.createElement('div'),
 					   outer = document.createElement('div'),
@@ -141,7 +141,6 @@
 					   wrap = document.getElementById('uploadBox'),
 					   errBox = document.getElementById('noItemsMsg');
    
-					$('#noItemsMsg').hide();
 					prog.className = 'prog';
 					size.className = 'size';
 					outer.className = 'progress progress-striped active';
@@ -158,8 +157,6 @@
 					this.setFileSizeBox(size);      
 
 					errBox.innerHTML = '';
-					$('#uploadButton').hide();
-					$('#continueButton').show();
 				  },	
 				   // Do something after finishing the upload
 				   // Note that the progress bar will be automatically removed upon completion because everything 
@@ -177,6 +174,14 @@
 							}
 							$('#uploadItems').val(uploadedItems);
 							$('#uploadBox').append('<div class="upload-card-small img-rounded">' + response.file + '</div>');
+							
+							if (uploadedItems.split(',').length >= 2) {
+								$('#noItemsMsg').hide();
+								$('#uploadButton').hide();
+								$('#continueButton').show();
+							} else if (uploadedItems.split(',').length == 1) {
+								$('#noItemsMsg').html('Upload at least one more item');
+							}
 						}
 					}
 			});
