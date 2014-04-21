@@ -31,6 +31,11 @@
 		$relationship_data['pair_b'] = $_POST[$j . '_pair_b'];
 		for ($i = 0; $i < count($data_headers[$relationships[$j][0]]); $i++) {
 			$relationship_column_data = array();
+			if (isset($_POST[$j . '_identifier'][$i])) {
+				$relationship_column_data['column_identifier'] = true;
+			} else {
+				$relationship_column_data['column_identifier'] = false;
+			}
 			$relationship_column_data['column_title'] = $_POST[$j . '_' . $i . '_header'];
 			$relationship_column_data['column_match_with'] = $_POST[$j . '_' . $i . '_match_with'];
 			$relationship_column_data['column_importance'] = $_POST[$j . '_' . $i . '_importance'];
@@ -47,8 +52,8 @@
 	$min_score = 0;
 	$max_score = $max_match_headers * 100 * $MAX_PRIORITY;
 	$score_intervals = 6;
-	$score_interval = (int) ($max_score / $score_intervals);
-		
+	$score_interval = (int) ($max_score / ($score_intervals - 1));
+	
 	$titles_array = array();
 	$matrices = array();
 	foreach ($relationships_data as $relationship_data) {
@@ -62,14 +67,25 @@
 		foreach ($data[$relationship_data['pair_b']] as $data_b) {
 			$x_count = 0;
 			$pair_a_row = array();
+			$identifier_b_column = '';
 						
 			foreach ($data[$relationship_data['pair_a']] as $data_a) {
 				$total_match = 0;
+				// Gets the default identifier column (the first column)
+				$identifier_a_column = '';
 				foreach ($relationship_data['pair_data'] as $pair_data) {
 					$total_match = $total_match + match_score_item((string) $data_a[$pair_data['column_title']], (string) $data_b[$pair_data['column_match_with']], $pair_data['column_importance'], $pair_data['column_type'], $pair_data['column_conditional']);
+					if ($pair_data['column_identifier']) {
+						$identifier_a_column = $pair_data['column_title'];
+						$identifier_b_column = $pair_data['column_match_with'];
+					}
 				}
-				// TODO - specific which row to use as name?
-				$titles_a[] = reset($data_a);
+				
+				if ($identifier_a_column == '') {
+					$titles_a[] = reset($data_a);
+				} else {
+					$titles_a[] = $data_a[$identifier_a_column];
+				}
 					
 				if ($total_match > 0) {
 					$pair_a_row[] = $total_match;
@@ -83,18 +99,18 @@
 			if ($y_count == 0) {
 				$titles['a'] = $titles_a;
 			}
-			// TODO - specific which row to use as name?
-			$titles_b[] = reset($data_b);
+			
+			if ($identifier_b_column == '') {
+				$titles_b[] = reset($data_b);
+			} else {
+				$titles_b[] = $data_b[$identifier_b_column];
+			}
 			
 			$matrix[] = $pair_a_row;
 			$y_count++;
 		}
 		$titles['b'] = $titles_b;
-		//echo 'asdf';
-		//var_dump($relationships_data);
 		$matrices[] = $matrix;
-				//var_dump(count($matrix));
-				//echo 'asfsfd';
 		$titles_array[] = $titles;
 	}
 	
@@ -157,7 +173,7 @@
 		
 		.vi-header {
 			width:100%;
-			height:100%;
+			height:40px;
 			padding:8px;
 			background-color:#F8F8F8;
 		}
@@ -209,7 +225,7 @@
 				<hr />
 				<a href="match.php" class="btn btn-primary btn-lg btn-block has-spinner">
 					<span class="spinner"><i class="fa fa-spin fa-refresh"></i></span>
-					Save and Continue
+					&nbsp;&nbsp;Save and Continue
 				</a>
 			</div>
         </div>
@@ -337,7 +353,7 @@
 				rowHeight: 38,
 				enableCellNavigation: true,
 				enableColumnReorder: false,
-    			multiColumnSort: true,
+    			multiColumnSort: false,
 				frozenColumn: 0 };';
 				
 			echo '$(function () {';			
@@ -367,36 +383,34 @@
 				data[s] = [];
 				$.each(matrix_index[s], function(i, matrix_item){
 					data[s][i] = {};
+					data[s][i]['id'] = 'id' + s + '_' + i;
 					data[s][i]['vi_' + s] = titles_index[s][1][i];
 					$.each(matrix_item, function(j, matrix_row_item){
 						data[s][i][s + '_' + j] = matrix_row_item;
 					});
 				});
 			}
-			<?php
+			
+		<?php
+			echo 'dataView = [];';
 			for ($x = 0; $x < count($matrices); $x++) {
-				echo 'grid_' . $x . ' = new Slick.Grid("#relationship_grid_' . $x . '", data[' . $x . '], columns_' . $x . ', options);';
-echo 'grid_' . $x . '.onSort.subscribe(function (e, args) {
-      var cols = args.sortCols;
-
-      data.sort(function (dataRow1, dataRow2) {
-          console.log(dataRow1);
-          console.log("asdf");
-          console.log(dataRow2);
-        for (var i = 0, l = cols.length; i < l; i++) {
-          var field = cols[i].sortCol.field;
-          var sign = cols[i].sortAsc ? 1 : -1;
-          var value1 = dataRow1[field], value2 = dataRow2[field];
-          var result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
-          if (result != 0) {
-            return result;
-          }
-        }
-        return 0;
-      });
-      grid_' . $x . '.invalidate();
-      grid_' . $x . '.render();
-    });';
+				echo 'dataView[' . $x . '] = new Slick.Data.DataView();';
+				echo 'grid_' . $x . ' = new Slick.Grid("#relationship_grid_' . $x . '", dataView[' . $x . '], columns_' . $x . ', options);';
+				echo '	dataView[' . $x . '].onRowCountChanged.subscribe(function (e, args) {
+						  grid_' . $x . '.updateRowCount();
+						  grid_' . $x . '.render();
+						});
+						dataView[' . $x . '].onRowsChanged.subscribe(function (e, args) {
+						  grid_' . $x . '.invalidateRows(args.rows);
+						  grid_' . $x . '.render();
+						});';
+				echo 'dataView[' . $x . '].setItems(data[' . $x . ']);';
+				echo 'grid_' . $x . '.onSort.subscribe(function (e, args) {
+					var comparer = function(a, b) {
+						return (a[args.sortCol.field] > b[args.sortCol.field]) ? 1 : -1;
+					}
+					dataView[' . $x . '].sort(comparer, args.sortAsc);
+					});';
 			}
 			echo '});';
 		?>

@@ -78,6 +78,7 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
+									<td>Identifier  <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Check to mark a column in the CSV files as the identifying column (eg. name of student)">(?)</a></td>
 									<td><?php echo $relationship[0]; ?>  <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Data columns from the first dataset.">(?)</a></td>
 									<td></td>
 									<td><?php echo $relationship[1]; ?> <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Data columns from the second dataset.">(?)</a></td>
@@ -88,12 +89,13 @@
 							</thead>
 							<tbody>
 								<?php
-								
 										$i = 0;
 										echo '<input type="hidden" name="' . $j . '_pair_a" value="' . $relationship[0] . '">';
 										echo '<input type="hidden" name="' . $j . '_pair_b" value="' . $relationship[1] . '">';
+
 										foreach ($data_headers[$relationship[0]] as $header) {
 											echo '<tr>';
+											echo '<td><input class="identifier-select identifier-select-' . $j . '" type="checkbox" id="' . $j . '_' . $i . '_identifier" data-pair="' . $j . '" data-item="' . $i . '" name="' . $j . '_identifier[' . $i . ']" value="1" /></td>';
 											echo '<td><input type="hidden" name="' . $j . '_' . $i . '_header" value="' . $header . '">
 												' . $header . '</td>';
 											echo '<td style="color:#CECECE;"> pairs with </td>';
@@ -137,7 +139,7 @@
 					?>
 					<button type="submit" class="btn btn-primary btn-lg btn-block has-spinner">
 						<span class="spinner"><i class="fa fa-spin fa-refresh"></i></span>
-						Save and Continue
+						&nbsp;&nbsp;Save and Continue
 					</button>
 				</form>
 			</div>
@@ -160,6 +162,12 @@
 				$(this).toggleClass('active');
 			});
     		
+    		$('.identifier-select').change(function() {
+    			$pair = $(this).data("pair");
+    			$row = $(this).data("item");
+    			$('.identifier-select-' + $pair).prop('checked', false);
+    			$('#' + $pair + '_' + $row + '_identifier').prop('checked', true);
+    		});
     		$('.importance-select').change(function() {
     			$pair = $(this).data("pair");
     			$row = $(this).data("item");

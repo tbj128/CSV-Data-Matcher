@@ -30,7 +30,7 @@
 	}
 	
 	function csv_get_array($raw_filename) {
-		$filename = 'csv/' . $raw_filename;
+		$filename = 'data/' . $raw_filename;
 		if(!is_readable($filename)) {
 			return FALSE;
 		}

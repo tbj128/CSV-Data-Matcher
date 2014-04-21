@@ -18,57 +18,12 @@
 		}
 	}
 	
-// 	$junior_name = 'Junior Data.csv';
-// 	$senior_name = 'Senior Data.csv';
-// 	$mentor_name = 'Mentor Data.csv';
-// 	
-// 	// Moves the files to the CSV folder if not moved already
-// 	if (isset($_POST['mentor_path'])
-// 		&& isset($_POST['junior_path'])
-// 		&& isset($_POST['senior_path'])) {
-// 
-// 		$mentor_name = $_POST['mentor_path'];
-// 		$junior_name = $_POST['junior_path'];
-// 		$senior_name = $_POST['senior_path'];
-// 		
-// 		rename('upload/files/' . $mentor_name, 'csv/' . $mentor_name);
-// 		rename('upload/files/' . $junior_name, 'csv/' . $junior_name);
-// 		rename('upload/files/' . $senior_name, 'csv/' . $senior_name);
-// 	}
-	
 	$data_headers = array();
 	$data = array();
 	foreach ($csv_files as $csv_file) {
 		$data_headers[$csv_file] = csv_get_headers($csv_file);
 		$data[$csv_file] = csv_get_array($csv_file);
 	}
-	
-	// Dump the CSV files into an array
-// 	$junior_headers = csv_get_headers($junior_name);
-// 	$senior_headers = csv_get_headers($senior_name);
-// 	$mentor_headers = csv_get_headers($mentor_name);
-// 	
-// 	$junior_data = csv_get_array($junior_name);
-// 	$senior_data = csv_get_array($senior_name);
-// 	$mentor_data = csv_get_array($mentor_name);
-	
-	// Are these CSV files usable? 
-// 	if ($junior_data === FALSE 
-// 		|| $senior_data === FALSE 
-// 		|| $mentor_data === FALSE) {
-// 		header("Location: index.php?err");
-// 	}
-	
-// 	$data_headers = array();
-// 	$data_headers[$junior_name] = $junior_headers;
-// 	$data_headers[$senior_name] = $senior_headers;
-// 	$data_headers[$mentor_name] = $mentor_headers;
-// 	
-// 	
-// 	$data = array();
-// 	$data[$junior_name] = $junior_data;
-// 	$data[$senior_name] = $senior_data;
-// 	$data[$mentor_name] = $mentor_data;
 	
 	$_SESSION['headers'] = $data_headers;
 	$_SESSION['data'] = $data;
@@ -105,9 +60,7 @@
 	?>
 
     <div class="content-section-a">
-
         <div class="container">
-		
 			<div style="margin-top:50px;">
 				<div class="row">
 					<h2>Specify Match Groups</h2>
@@ -148,7 +101,12 @@
 						<input type="hidden" name="senior_path" value="<?php echo $senior_name; ?>">
 						<input type="hidden" name="junior_path" value="<?php echo $junior_name; ?>">
 						<hr />
-						<p><input type="submit" class="btn btn-primary" value="Continue"></p>
+						
+						<button type="submit" class="btn btn-primary btn-lg btn-block has-spinner">
+							<span class="spinner"><i class="fa fa-spin fa-refresh"></i></span>
+							&nbsp;&nbsp;Save and Continue
+						</button>
+						
 					</div>
 				</form>
 			</div>
