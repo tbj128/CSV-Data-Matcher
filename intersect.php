@@ -78,13 +78,13 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<td>Identifier  <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Check to mark a column in the CSV files as the identifying column (eg. name of student)">(?)</a></td>
-									<td><?php echo $relationship[0]; ?>  <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Data columns from the first dataset.">(?)</a></td>
+									<td>Identifier  <a href="help.php" target="_blank" style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Check to mark a column in the CSV files as the identifying column (eg. name of student)">(?)</a></td>
+									<td><?php echo $relationship[0]; ?>  <a href="help.php" target="_blank" style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Data columns from the first dataset.">(?)</a></td>
 									<td></td>
-									<td><?php echo $relationship[1]; ?> <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Data columns from the second dataset.">(?)</a></td>
-									<td>Importance <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="The relative importance of this data column match pair compared to other data column match pairs.">(?)</a></td>
-									<td>Match Type <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Exact Match: Two data cells must be identical. Inexact Match: Two data cells are comma separated lists. Conditional Match: Two data cells must match up with third.">(?)</a></td>
-									<td>Conditional <a style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Phrase used in conditional matches OR number used in range matches.">(?)</a></td>
+									<td><?php echo $relationship[1]; ?> <a href="help.php" target="_blank" style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Data columns from the second dataset.">(?)</a></td>
+									<td>Importance <a href="help.php" target="_blank" style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="The relative importance of this data column match pair compared to other data column match pairs.">(?)</a></td>
+									<td>Match Type <a href="help.php" target="_blank" style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Exact Match: Two data cells must be identical. Inexact Match: Two data cells are comma separated lists. Conditional Match: Two data cells must match up with third.">(?)</a></td>
+									<td>Conditional <a href="help.php" target="_blank" style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Phrase used in conditional matches OR number used in range matches.">(?)</a></td>
 								</tr>
 							</thead>
 							<tbody>
@@ -108,9 +108,10 @@
 											echo '</select></td>';
 											echo '<td>
 												<select class="importance-select form-control" data-pair="' . $j . '" data-item="' . $i . '" name="' . $j . '_' . $i . '_importance" id="' . $j . '_' . $i . '_importance">
-												  <option value="0">Do Not Use</option>
-												  <option value="3">Important</option>
-												  <option value="2">Somewhat Important</option>
+												  <option value="0">Not Applicable</option>
+												  <option value="16">Very Important</option>
+												  <option value="8">Important</option>
+												  <option value="4">Somewhat Important</option>
 												  <option value="1">Least Important</option>
 												</select></td>';
 											echo '<td>

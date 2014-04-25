@@ -9,7 +9,10 @@
 					<li>Built in Vancouver
 					</li>
 					<li class="footer-menu-divider">&sdot;</li>
-					<li><a href="#about">About</a>
+					<li><a href="about.php" target="_blank">About</a>
+					</li>
+					<li class="footer-menu-divider">&sdot;</li>
+					<li><a href="help.php" target="_blank">Help</a>
 					</li>
 				</ul>
 			</div>

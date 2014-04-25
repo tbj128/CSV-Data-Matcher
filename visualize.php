@@ -25,6 +25,7 @@
 	$relationships = $_SESSION['relationships'];
 	
 	$relationships_data = array();
+	$identifier_data = array();
 	for ($j = 0; $j < count($relationships); $j++) {
 		$relationship_data = array();
 		$relationship_data['pair_a'] = $_POST[$j . '_pair_a'];
@@ -33,6 +34,8 @@
 			$relationship_column_data = array();
 			if (isset($_POST[$j . '_identifier'][$i])) {
 				$relationship_column_data['column_identifier'] = true;
+				$identifier_data[$relationship_data['pair_a']] = $_POST[$j . '_' . $i . '_header'];
+				$identifier_data[$relationship_data['pair_b']] = $_POST[$j . '_' . $i . '_match_with'];
 			} else {
 				$relationship_column_data['column_identifier'] = false;
 			}
@@ -116,6 +119,7 @@
 	
 	$_SESSION['matrices'] = $matrices;
 	$_SESSION['relationships_data'] = $relationships_data;
+	$_SESSION['identifier_data'] = $identifier_data;
 	
 ?>
 
