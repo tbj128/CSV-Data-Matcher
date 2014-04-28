@@ -194,16 +194,23 @@
 		return 0;
 	}
 
-	// Returns 100 if and only if a and b both match with the given match parameter
+	// Returns 100 if and only if a and b both match with the given match[] parameter
 	// Returns 0 otherwise
 	// eg. If for example, one wants to match people by if they can come a given day
 	// This day would be either "true" (they can come) or "false" (they cannot come)
 	// Giving a high match score for two people who cannot come on a given day would be 
 	// pretty useless
 	function both_match_with($a, $b, $match) {
-		if (strcmp((string) $a, (string) $match) == 0 &&
-			strcmp((string) $b, (string) $match) == 0) {
-			return 100;	
+		$match_items = explode(',', $match);
+		if ($match_items) {
+			foreach ($match_items as $match_item) {
+				$match_item = trim($match_item);
+				if (strcmp(trim((string) $a), (string) $match_item) == 0 &&
+					strcmp(trim((string) $b), (string) $match_item) == 0) {
+					return 100;	
+				}
+			}
+			return 0;
 		} else {
 			return 0;
 		}

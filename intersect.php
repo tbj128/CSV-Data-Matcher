@@ -123,7 +123,7 @@
 												  <option value="5">Match Within Range</option>
 												</select><span id="' . $j . '_' . $i . '_type_empty">-</span></td>';
 											echo '<td>
-													<input type="text" name="' . $j . '_' . $i . '_conditional" id="' . $j . '_' . $i . '_conditional" style="display:none;" data-toggle="tooltip" data-placement="top" data-original-title="A good match occurs when both data fields match this term." />
+													<input type="text" name="' . $j . '_' . $i . '_conditional" id="' . $j . '_' . $i . '_conditional" style="display:none;" data-toggle="tooltip" data-placement="top" data-original-title="A good match occurs when both data fields match one of the terms described in a comma-separated list." />
 													<span id="' . $j . '_' . $i . '_conditional_empty">-</span>
 												  </td>
 												</tr>';
@@ -186,7 +186,7 @@
     			$pair = $(this).data("pair");
     			$row = $(this).data("item");
     			if ($(this).val() == 3) {
-    				$('#' + $pair + '_' + $row + '_conditional').show().attr('placeholder', 'Term to match');
+    				$('#' + $pair + '_' + $row + '_conditional').show().attr('placeholder', 'Term(s) to match');
     				$('#' + $pair + '_' + $row + '_conditional_empty').hide();
     			} else if ($(this).val() == 5) {
     				$('#' + $pair + '_' + $row + '_conditional').show().attr('placeholder', 'Match occurs within...');
