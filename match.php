@@ -223,9 +223,6 @@
     <script src="js/bootstrap.js"></script>
     <script>
     	$( document ).ready(function() {
-// 			$('.has-spinner').click(function() {
-// 				$(this).toggleClass('active');
-// 			});
     	});
     </script>
 
