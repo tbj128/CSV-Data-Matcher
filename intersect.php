@@ -75,7 +75,7 @@
 					?>
 					<div class="row pale-box">
 						<h3><?php echo $relationship[0]; ?> matched with <?php echo $relationship[1]; ?></h3>
-						<table class="table table-hover">
+						<table class="table table-hover" id="<?php echo $j; ?>-table">
 							<thead>
 								<tr>
 									<td>Identifier  <a href="help.php" target="_blank" style="cursor:pointer;" data-toggle="tooltip" data-placement="top" data-original-title="Check to mark a column in the CSV files as the identifying column (eg. name of student)">(?)</a></td>
@@ -119,7 +119,8 @@
 												  <option value="1">Exact Match</option>
 												  <option value="4">Similar Wording</option>
 												  <option value="2">Comma Separated Lists</option>
-												  <option value="3">Conditional Match</option>
+												  <option value="3">Strong Conditional</option>
+												  <option value="6">Weak Conditional</option>
 												  <option value="5">Match Within Range</option>
 												</select><span id="' . $j . '_' . $i . '_type_empty">-</span></td>';
 											echo '<td>
@@ -130,6 +131,12 @@
 											$i++;
 										}
 								?>
+								<tr id="add-row-<?php echo $j; ?>">
+									<td colspan="7" style="text-align:center;">
+										<input type="hidden" value="<?php echo $i ?>" name="<?php echo $j; ?>_row_count" id="<?php echo $j; ?>_row_count">
+										<button type="button" class="btn-add-row btn btn-info" data-tableno="<?php echo $j ?>"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Another Match Pair</button>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 						<hr />
@@ -169,7 +176,7 @@
     			$('.identifier-select-' + $pair).prop('checked', false);
     			$('#' + $pair + '_' + $row + '_identifier').prop('checked', true);
     		});
-    		$('.importance-select').change(function() {
+    		$('table').on("change", ".importance-select", function() {
     			$pair = $(this).data("pair");
     			$row = $(this).data("item");
     			if ($(this).val() === "0") {
@@ -182,7 +189,7 @@
     				$('#' + $pair + '_' + $row + '_type_empty').hide();
     			}
     		});
-    		$('.type-select').change(function() {
+    		$('table').on("change", ".type-select", function() {
     			$pair = $(this).data("pair");
     			$row = $(this).data("item");
     			if ($(this).val() == 3) {
@@ -195,6 +202,54 @@
     				$('#' + $pair + '_' + $row + '_conditional').hide();
     				$('#' + $pair + '_' + $row + '_conditional_empty').show();
     			}
+    		});
+    		$('.btn-add-row').click(function() {
+    			var table_no = $(this).data("tableno");
+    			var table_rows = $('#' + table_no + '-table tr').length; 
+    			var new_table_row = table_rows - 2;
+    			
+    			var html;
+    			html += '<tr><td><input class="identifier-select identifier-select-' + table_no + '" type="checkbox" id="' + table_no + '_' + new_table_row + '_identifier" data-pair="' + table_no + '" data-item="' + new_table_row + '" name="' + table_no + '_identifier[' + new_table_row + ']" value="1"></td>';
+    			html += '<td><select class="form-control" name="' + table_no + '_' + new_table_row + '_header">';
+				<?php
+    				echo 'html += \'<option value="">-</option>\';';
+					foreach ($data_headers[$relationship[0]] as $inner_header) {
+						echo 'html += \'<option value="' . $inner_header . '">' . $inner_header . '</option>\';';
+					}
+    			?>
+				html += '</select></td>';
+				html += '<td style="color:#CECECE;"> pairs with </td><td>';
+				html += '<select class="form-control" name="' + table_no + '_' + new_table_row + '_match_with">';
+				<?php
+    				echo 'html += \'<option value="">-</option>\';';
+					foreach ($data_headers[$relationship[1]] as $inner_header) {
+						echo 'html += \'<option value="' . $inner_header . '">' . $inner_header . '</option>\';';
+					}
+    			?>
+				html += '</select></td>';
+				html += '<td><select class="importance-select form-control" data-pair="' + table_no + '" data-item="' + new_table_row + '" name="' + table_no + '_' + new_table_row + '_importance" id="' + table_no + '_' + new_table_row + '_importance">';
+					html += '<option value="0">Not Applicable</option>';
+					html += '<option value="16">Very Important</option>';
+				  	html += '<option value="8">Important</option>';
+				  	html += '<option value="4">Somewhat Important</option>';
+				  	html += '<option value="1">Least Important</option>';
+				html += '</select></td>';
+				
+				html += '<td><select class="type-select form-control" data-pair="' + table_no + '" data-item="' + new_table_row + '" name="' + table_no + '_' + new_table_row + '_type" id="' + table_no + '_' + new_table_row + '_type" style="display: none;">';
+		 	 		html += '<option value="1">Exact Match</option>';
+					html += '<option value="4">Similar Wording</option>';
+					html += '<option value="2">Comma Separated Lists</option>';
+					html += '<option value="3">Strong Conditional</option>';
+					html += '<option value="6">Weak Conditional</option>';
+					html += '<option value="5">Match Within Range</option>';
+				html += '</select><span id="' + table_no + '_' + new_table_row + '_type_empty">-</span></td>';
+				html += '<td>';
+					html += '<input type="text" name="' + table_no + '_' + new_table_row + '_conditional" id="' + table_no + '_' + new_table_row + '_conditional" style="display: none;" data-toggle="tooltip" data-placement="top" data-original-title="A good match occurs when both data fields match one of the terms described in a comma-separated list.">';
+					html += '<span id="' + table_no + '_' + new_table_row + '_conditional_empty">-</span>';
+		  		html += '</td></tr>';
+		  		
+    			$('#add-row-' + table_no).before(html);
+    			$('#' + table_no + '_row_count').val(new_table_row + 1);
     		});
     		<?php
     			echo 'var $max_j = ' . count($relationships) . ';';

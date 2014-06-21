@@ -20,6 +20,10 @@
 	$matrices = $_SESSION['matrices'];
 	$relationships_data = $_SESSION['relationships_data'];
 	$identifier_data = $_SESSION['identifier_data'];
+	$highest_obtained_score = $_SESSION['highest_obtained_score'];
+	if(!isset($_SESSION['highest_obtained_score'])) {
+	  $highest_obtained_score = 1;
+	}
 	$output_items = array();
 ?>
 
@@ -136,7 +140,7 @@
 							}
 							
 							echo '<tr>';
-							echo '<td>' . $item_1 . '</td><td>' . $item_2 . '</td><td>' . $cost . '</td>';
+							echo '<td>' . $item_1 . '</td><td>' . $item_2 . '</td><td>' . round(($cost / $highest_obtained_score), 3) * 100 . '%</td>';
 							echo '</tr>';
 							
 							// Preps the full CSV file content
@@ -161,7 +165,7 @@
 								echo '<td>' . $item . '</td><td>-</td><td>Not Matched</td>';
 								echo '</tr>';
 							
-								// Lonely item that we need to remember to add to our list
+								// Lonely items that we need to remember to add to our list
 								$out_row_item = array();
 								foreach ($data[$dataset_name_a][0] as $field_name => $field_value) {
 									$out_row_item[] = "";
@@ -183,7 +187,7 @@
 								echo '<td>-</td><td>' . $item . '</td><td>Not Matched</td>';
 								echo '</tr>';
 							
-								// Lonely item that we need to remember to add to our list
+								// Lonely items that we need to remember to add to our list
 								$out_row_item = array();
 								foreach ($data[$dataset_name_a][$i] as $field_name => $field_value) {
 									$out_row_item[] = $field_value;
@@ -221,10 +225,6 @@
     <!-- JavaScript -->
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script>
-    	$( document ).ready(function() {
-    	});
-    </script>
 
 	</body>
 </html>

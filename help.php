@@ -99,9 +99,14 @@
 									<li>eg. &quot;snow, ice, castle&quot; and &quot;castle, snow, ice&quot; will have a high similarity score</li>
 								</ul>
 								</li>
-								<li>Conditional Match: A high similarity score will only be assigned if the text in both data column cell matches with one of the terms in a comma-separated list you describe under the &#39;Conditional&#39; column
+								<li>Strong Conditional: A high similarity score will only be assigned if the text in both data column cells both matches the same term in a comma-separated list you describe under the &#39;Conditional&#39; column
 								<ul>
-									<li>eg. If you wanted to only match people based on which days they could come to a dance, you could have a dataset with columns that indicate whether a given person can come on a day or not. A high similarity score would only be useful if two people could come on the same day (eg. both people indicated that yes, they can come on a Friday)</li>
+									<li>eg. If a and b represented birthdays and you wanted to pair people with the same gender, you could provide the match string as M, F. This would mean that a good match would be established if (a=M and b=M) or (a=F and b=F) and a score of 0 assigned to any other combination (such as, a=ERWER and b=F)</li>
+								</ul>
+								</li>
+								<li>Weak Conditional: A high similarity score will only be assigned if the text in each data column cells matches with one of the terms in a comma-separated list you describe under the &#39;Conditional&#39; column
+								<ul>
+									<li>eg. If a and b represented race results and you wanted to pair the highest ranking people, you could provide the conditional string as 1, 2. This would mean that a good match would be established if (a=1 and b=1) or (a=1 and b=2) or (a=2 and b=1) or (a=2 and b=2) and a score of 0 assigned to any other combination (such as, a=3 and b=1)</li>
 								</ul>
 								</li>
 								<li>Match within Range: A high similarity score will be given if the two numbers in the two data column cells are within a given range described under the &#39;Conditional&#39; column

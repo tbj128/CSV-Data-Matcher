@@ -68,21 +68,11 @@
 				<input type="hidden" name="upload_items" id="uploadItems" value="">
 				<div class="row">
 					<div id="uploadButton" class="col-lg-3 upload-card img-rounded">
-						<div style="display: table-cell; vertical-align: middle;">
+						<div style="display:table-cell;vertical-align: middle;">
 							<div>
 								<img src="img/ic-upload.png">
 								<span style="color:#FFF;font-size:22px;margin:5px 0 0 10px;vertical-align:middle;">
 									Select CSV Data
-								</span>
-							</div>
-						</div>
-					</div>
-					<div id="continueButton" class="col-lg-3 upload-card img-rounded" style="display:none;">
-						<div style="display: table-cell; vertical-align: middle;">
-							<div>
-								<img src="img/ic-check.png">
-								<span style="color:#FFF;font-size:22px;margin:5px 0 0 10px;vertical-align:middle;">
-									Continue
 								</span>
 							</div>
 						</div>
@@ -96,11 +86,14 @@
 						</div>
 					</div>
 				</div><!-- /.row -->
-<!-- 
-				<div class="row">
-					<p><input type="submit" class="btn btn-primary" value="Continue"></p>
+
+				<div class="row" style="margin-top:32px;">
+					<button type="submit" class="btn btn-primary btn-lg btn-block has-spinner">
+						<i class="fa fa-check"></i>
+						&nbsp;&nbsp;Continue
+					</button>
 				</div>
- -->
+
 			  </form>
         	</div>
         </div>
@@ -177,7 +170,6 @@
 							
 							if (uploadedItems.split(',').length >= 2) {
 								$('#noItemsMsg').hide();
-								$('#uploadButton').hide();
 								$('#continueButton').show();
 							} else if (uploadedItems.split(',').length == 1) {
 								$('#noItemsMsg').html('Upload at least one more item');

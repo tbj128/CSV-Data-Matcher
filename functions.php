@@ -194,13 +194,13 @@
 		return 0;
 	}
 
-	// Returns 100 if and only if a and b both match with the given match[] parameter
+	// Returns 100 if and only if a and b both match with all of the given match[] parameter
 	// Returns 0 otherwise
 	// eg. If for example, one wants to match people by if they can come a given day
 	// This day would be either "true" (they can come) or "false" (they cannot come)
 	// Giving a high match score for two people who cannot come on a given day would be 
 	// pretty useless
-	function both_match_with($a, $b, $match) {
+	function strong_match_with($a, $b, $match) {
 		$match_items = explode(',', $match);
 		if ($match_items) {
 			foreach ($match_items as $match_item) {
@@ -208,6 +208,31 @@
 				if (strcmp(trim((string) $a), (string) $match_item) == 0 &&
 					strcmp(trim((string) $b), (string) $match_item) == 0) {
 					return 100;	
+				}
+			}
+			return 0;
+		} else {
+			return 0;
+		}
+	}
+	
+	// The more closely a and b matches with a given match[], the higher score they will receive
+	// eg. If a and b represented race results and you wanted to pair the highest ranking people, 
+	// you could provide the match[] as [1, 2]. This would mean that a good match would be established
+	// if (a=1 and b=1) or (a=1 and b=2) or (a=2 and b=1) or (a=2 and b=2) and a score of 0 assigned
+	// to any other combination (such as, a=3 and b=1)
+	function weak_match_with($a, $b, $match) {
+		$match_items = explode(',', $match);
+		if ($match_items) {
+			foreach ($match_items as $match_item) {
+				$match_item = trim($match_item);
+				if (strcmp(trim((string) $a), (string) $match_item) == 0) {
+					foreach ($match_items as $tmp_match_item) {
+						$tmp_match_item = trim($tmp_match_item);
+						if (strcmp(trim((string) $b), (string) $tmp_match_item) == 0) {
+							return 100;
+						}
+					}
 				}
 			}
 			return 0;
@@ -223,9 +248,10 @@
 		global $MATCH_NOT_USED;
 		global $MATCH_EXACT;
 		global $MATCH_INEXACT;
-		global $MATCH_EXACT_WITH_PROVIDED;
+		global $MATCH_STRONG_EXACT_WITH_PROVIDED;
 		global $MATCH_SIMILAR_TEXT;
 		global $MATCH_WITHIN_RANGE;
+		global $MATCH_WEAK_EXACT_WITH_PROVIDED;
 		
 		switch ($match_type) {
 			case $MATCH_NOT_USED:
@@ -236,13 +262,15 @@
 				$a_arr = string_to_array($a);
 				$b_arr = string_to_array($b);
 				return array_similarity($a_arr, $b_arr) * $priority;
-			case $MATCH_EXACT_WITH_PROVIDED:
-				return both_match_with($a, $b, $match_term) * $priority;
+			case $MATCH_STRONG_EXACT_WITH_PROVIDED:
+				return strong_match_with($a, $b, $match_term) * $priority;
 			case $MATCH_SIMILAR_TEXT:
 				similar_text($a, $b, $per);
 				return $per * $priority;
 			case $MATCH_WITHIN_RANGE:
 				return match_within_range($a, $b, $match_term);
+			case $MATCH_WEAK_EXACT_WITH_PROVIDED:
+				return weak_match_with($a, $b, $match_term) * $priority;
 		}
 	}
 ?>

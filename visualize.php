@@ -4,7 +4,6 @@
 	// @author: Tom Jin
 	// @date: Feb 2, 2014
 	ini_set('max_execution_time', 300);
-	
 	include_once 'config.php';
 	include_once 'functions.php';
 	include_once 'munkres.php';
@@ -30,7 +29,8 @@
 		$relationship_data = array();
 		$relationship_data['pair_a'] = $_POST[$j . '_pair_a'];
 		$relationship_data['pair_b'] = $_POST[$j . '_pair_b'];
-		for ($i = 0; $i < count($data_headers[$relationships[$j][0]]); $i++) {
+		$row_count = $_POST[$j . '_row_count'];
+		for ($i = 0; $i < $row_count; $i++) {
 			$relationship_column_data = array();
 			if (isset($_POST[$j . '_identifier'][$i])) {
 				$relationship_column_data['column_identifier'] = true;
@@ -53,8 +53,9 @@
 	}
 	
 	$min_score = 0;
-	$max_score = $max_match_headers * 100 * $MAX_PRIORITY;
-	$score_intervals = 6;
+	$max_score = 100;
+	$highest_obtained_score = 0;
+	$score_intervals = 8;
 	$score_interval = (int) ($max_score / ($score_intervals - 1));
 	
 	$titles_array = array();
@@ -77,10 +78,12 @@
 				// Gets the default identifier column (the first column)
 				$identifier_a_column = '';
 				foreach ($relationship_data['pair_data'] as $pair_data) {
-					$total_match = $total_match + match_score_item((string) $data_a[$pair_data['column_title']], (string) $data_b[$pair_data['column_match_with']], $pair_data['column_importance'], $pair_data['column_type'], $pair_data['column_conditional']);
-					if ($pair_data['column_identifier']) {
-						$identifier_a_column = $pair_data['column_title'];
-						$identifier_b_column = $pair_data['column_match_with'];
+					if ($pair_data['column_title'] != '' && $pair_data['column_match_with'] != '') {
+						$total_match = $total_match + match_score_item((string) $data_a[$pair_data['column_title']], (string) $data_b[$pair_data['column_match_with']], $pair_data['column_importance'], $pair_data['column_type'], $pair_data['column_conditional']);
+						if ($pair_data['column_identifier']) {
+							$identifier_a_column = $pair_data['column_title'];
+							$identifier_b_column = $pair_data['column_match_with'];
+						}
 					}
 				}
 				
@@ -90,10 +93,16 @@
 					$titles_a[] = $data_a[$identifier_a_column];
 				}
 					
+				// Writes the matches
 				if ($total_match > 0) {
 					$pair_a_row[] = $total_match;
 				} else {
 					$pair_a_row[] = 0;
+				}
+				
+				// Records the highest obtained score
+				if ($highest_obtained_score < $total_match) {
+					$highest_obtained_score = $total_match;
 				}
 				
 				$x_count++;
@@ -120,6 +129,7 @@
 	$_SESSION['matrices'] = $matrices;
 	$_SESSION['relationships_data'] = $relationships_data;
 	$_SESSION['identifier_data'] = $identifier_data;
+	$_SESSION['highest_obtained_score'] = $highest_obtained_score;
 	
 ?>
 
@@ -185,8 +195,7 @@
 		<?php
 			// To deal with the different shades of colors
 			
-			$color = array('#ffffff', '#ebfae4', '#c3edad', '#8bdd60', '#76d643', '#54cc14');
-			
+			$color = array('#ffffff', '#ebfae4', '#c3edad', '#8bdd60', '#76d643', '#54cc14', '#48b80c', '#3fac05');
 			for ($s = 0; $s < $score_intervals; $s++) {
 				echo '.vi-' . $s . ' {
 					width:100%;
@@ -336,7 +345,11 @@
 					$col_pos = 0;
 					$last_col_pos = count($matrix_row) - 1;
 					foreach ($matrix_row as $matrix_column) {
-						echo $matrix_column;
+						if ($highest_obtained_score > 0) {
+							echo round(($matrix_column / $highest_obtained_score), 3) * 100;
+						} else {
+							echo $matrix_column;
+						}
 						if ($col_pos != $last_col_pos) {
 							echo ',';
 						}
