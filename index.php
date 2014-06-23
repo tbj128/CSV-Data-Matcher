@@ -87,7 +87,7 @@
 					</div>
 				</div><!-- /.row -->
 
-				<div class="row" style="margin-top:32px;">
+				<div id="continueButton" class="row" style="display:none;margin-top:32px;">
 					<button type="submit" class="btn btn-primary btn-lg btn-block has-spinner">
 						<i class="fa fa-check"></i>
 						&nbsp;&nbsp;Continue
