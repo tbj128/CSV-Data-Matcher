@@ -21,7 +21,7 @@
 	$relationships_data = $_SESSION['relationships_data'];
 	$identifier_data = $_SESSION['identifier_data'];
 	$highest_obtained_score = $_SESSION['highest_obtained_score'];
-	if(!isset($_SESSION['highest_obtained_score'])) {
+	if($highest_obtained_score == 0 || !isset($_SESSION['highest_obtained_score'])) {
 	  $highest_obtained_score = 1;
 	}
 	$output_items = array();
