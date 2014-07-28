@@ -10,23 +10,8 @@
 	session_start();
 	$curr_page = 1;
 	
-	$csv_files = array();
-	if (isset($_POST['upload_items'])) {
-		$uploaded_items = explode(",", $_POST['upload_items']);
-		foreach ($uploaded_items as $uploaded_item) {
-			$csv_files[] = $uploaded_item;
-		}
-	}
-	
-	$data_headers = array();
-	$data = array();
-	foreach ($csv_files as $csv_file) {
-		$data_headers[$csv_file] = csv_get_headers($csv_file);
-		$data[$csv_file] = csv_get_array($csv_file);
-	}
-	
-	$_SESSION['headers'] = $data_headers;
-	$_SESSION['data'] = $data;
+	$data_headers = $_SESSION['headers'];
+	$data = $_SESSION['data'];
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +53,7 @@
 						<blockquote>You've uploaded <?php echo count($data); ?> data files. Select the matching relationship you want to generate below.</blockquote>
 					</div>
 				</div>
-				<form method="post" action="intersect.php">
+				<form method="post" action="preintersect.php">
 					<div class="row">
 					<table class="table" style="width:600px;">
 					<?php

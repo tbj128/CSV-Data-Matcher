@@ -75,6 +75,10 @@ body, h1, h2, h3, h4, h5, h6 {
    right:50%;
 }
 
+.nav-progress ul li a {
+   cursor:default !important;
+}
+
 .lead {
 	font-size: 18px;
 	font-weight: 400;

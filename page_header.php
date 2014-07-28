@@ -66,17 +66,18 @@
 		$l_3 = "javascript:void(0);";
 		$l_4 = "match.php";
 	}
+	
 ?>
 			
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="row nav-progress">
 			<ul class="nav nav-pills">
-			  <li <?php echo $t_0; ?>><a href="<?php echo $l_0; ?>">Upload Data</a></li>
-			  <li <?php echo $t_1; ?>><a href="<?php echo $l_1; ?>">Define Relationship</a></li>
-			  <li <?php echo $t_2; ?>><a href="<?php echo $l_2; ?>">Define Matching</a></li>
-			  <li <?php echo $t_3; ?>><a href="<?php echo $l_3; ?>">Visualize</a></li>
-			  <li <?php echo $t_4; ?>><a href="<?php echo $l_4; ?>">Match</a></li>
+				<li <?php echo $t_0; ?>><a href="<?php echo $l_0; ?>">Upload Data</a></li>
+				<li <?php echo $t_1; ?>><a href="<?php echo $l_1; ?>">Define Relationship</a></li>
+				<li <?php echo $t_2; ?>><a href="<?php echo $l_2; ?>">Define Matching</a></li>
+				<li <?php echo $t_3; ?>><a href="<?php echo $l_3; ?>">Visualize</a></li>
+				<li <?php echo $t_4; ?>><a href="<?php echo $l_4; ?>">Match</a></li>
 			</ul>
 		</div>
 	</div>

@@ -6,6 +6,10 @@
 	
 	include_once 'config.php';
 	$curr_page = 0;
+	
+	session_start();
+	
+	unset($_SESSION['relationships_data']);
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +67,7 @@
 					<h1 id="navbar">Pair Up.</h1>
 					<h3>Upload, visualize, and match CSV datasets.</h3>
 				</div>
-				<form id="uploadForm" method="post" action="diverge.php">
+				<form id="uploadForm" method="post" action="prediverge.php">
 				<input type="submit" id="uploadSubmit" style="display:none;">
 				<input type="hidden" name="upload_items" id="uploadItems" value="">
 				<div class="row">
