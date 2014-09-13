@@ -160,7 +160,7 @@
 			<?php
 				echo 'html += \'<option value="">-</option>\';';
 				foreach ($data_headers[$relationship[0]] as $inner_header) {
-					echo 'html += \'<option value="' . $inner_header . '">' . $inner_header . '</option>\';';
+					echo 'html += \'<option value="' . addslashes($inner_header) . '">1' . addslashes($inner_header) . '</option>\';';
 				}
 			?>
 			html += '</select></td>';
@@ -169,7 +169,7 @@
 			<?php
 				echo 'html += \'<option value="">-</option>\';';
 				foreach ($data_headers[$relationship[1]] as $inner_header) {
-					echo 'html += \'<option value="' . $inner_header . '">' . $inner_header . '</option>\';';
+					echo 'html += \'<option value="' . addslashes($inner_header) . '">' . addslashes($inner_header) . '</option>\';';
 				}
 			?>
 			html += '</select></td>';
@@ -304,22 +304,22 @@
 							if ($column_identifier) {
 								echo "$('#" . $j . "_" . $i . "_identifier').prop('checked', true);";
 							}
-							$column_title = $relationship_row_data["column_title"];
+							$column_title = addslashes($relationship_row_data["column_title"]);
 							if (($i > ($original_row_count - 1)) && ($column_title !== "")) {
 								// Only use if the row we're working with is an added row
 								echo "$('select[name=\"" . $j . "_" . $i . "_header\"] option[value=\"" . $column_title . "\"]').attr('selected',true);";
 							}
-							$column_match_with = $relationship_row_data["column_match_with"];
+							$column_match_with = addslashes($relationship_row_data["column_match_with"]);
 							if ($column_match_with !== "") {
 								echo "$('select[name=\"" . $j . "_" . $i . "_match_with\"] option[value=\"" . $column_match_with . "\"]').attr('selected',true);";
 							}
-							$column_importance = $relationship_row_data["column_importance"];
+							$column_importance = addslashes($relationship_row_data["column_importance"]);
 							if ($column_importance > 0) {
 								echo "$('#" . $j . "_" . $i . "_importance option[value=\"" . $column_importance . "\"]').attr('selected',true);";
 								echo "$('#" . $j . "_" . $i . "_type').show();";
 								echo "$('#" . $j . "_" . $i . "_type_empty').hide();";
 							}
-							$column_type = $relationship_row_data["column_type"];
+							$column_type = addslashes($relationship_row_data["column_type"]);
 							if ($column_type > 1) {
 								echo "$('#" . $j . "_" . $i . "_type option[value=\"" . $column_type . "\"]').attr('selected',true);";
 							}
@@ -327,7 +327,7 @@
 								echo "$('#" . $j . "_" . $i . "_conditional').show();";
 								echo "$('#" . $j . "_" . $i . "_conditional_empty').hide();";
 							}
-							$column_conditional = $relationship_row_data["column_conditional"];
+							$column_conditional = addslashes($relationship_row_data["column_conditional"]);
 							if ($column_conditional !== "") {
 								echo "$('#" . $j . "_" . $i . "_conditional').val('" . $column_conditional . "');";
 							}
